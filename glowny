@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int i;
+int a[50000];
+
+int n;
+
+
+int main()
+{
+    FILE *tablica;
+    tablica = fopen("numbers.txt", "r");               // otwiera plik z ciagiem liczb
+
+    if (tablica == NULL){
+        printf("Blad przy wczytywaniu pliku\n");
+        exit (0);                                       // w przypadku bledu
+    }
+
+    i=0;
+    while (fscanf(tablica, "%d,", &a[i]) != EOF){
+      i++;
+      n=i;                                              // wpisuje wszystkie liczby do tablicy i zapisuje ilosc liczb pod "n"
+    }
+
+    for (i = 0; i < n; i++){
+        printf("%d" , i);
+        printf(" wyraz ciagu: %d \n", a[i]);            // wypisuje wszystekie liczby
+    }
+
+    fclose(tablica);
+    int x1[n];
+    int y1[n];
+    int i = 2;
+
+    memcpy(x1, a, sizeof(int) * n);
+    memcpy(y1, x1, sizeof(int) * n);
+
+    while (i < n) {
+        y1[i] = x1[i - 1] + x1[i];
+        y1[i] /= 2;
+        i++;
+    }
+
+    printf("\n");
+    for (i = 0; i < n; i++)
+        printf("%d ", y1[i]);
+    return 0;
+}
